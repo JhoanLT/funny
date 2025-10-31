@@ -1,5 +1,5 @@
 cat > README.md <<'EOF'
-# Proyecto Purely — Backend (Node.js + TypeScript)
+# Proyecto Funny — Backend (Node.js + TypeScript)
 
 ## Requisitos mínimos
 - Node.js (recomendado `v18+`) y `npm`
@@ -8,12 +8,12 @@ cat > README.md <<'EOF'
 
 ## Clonar el repositorio
 (SSH)
-`git clone git@github.com:JhoanLT/purely-backend.git`
+`git clone git@github.com:JhoanLT/funny-backend.git`
 
 (HTTPS)
-`git clone https://github.com/JhoanLT/purely-backend.git`
+`git clone https://github.com/JhoanLT/funny-backend.git`
 
-`cd purely-backend`
+`cd funny-backend`
 `git checkout main`
 
 ## Ejecutar sin Docker (modo local)
