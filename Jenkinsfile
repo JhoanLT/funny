@@ -1,6 +1,6 @@
 pipeline {
   agent any
-  tools { nodejs 'node20' }
+  tools { nodejs 'nodejs' }
   options { disableConcurrentBuilds() }
   triggers { pollSCM('H/5 * * * *') } // sin webhook
 
