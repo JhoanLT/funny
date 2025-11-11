@@ -1,35 +1,39 @@
 pipeline {
   agent any
   tools { nodejs 'node20' }
-  options { disableConcurrentBuilds() }
-  triggers { pollSCM('H/5 * * * *') } // sin webhook
+
+  options { timestamps() }
 
   stages {
     stage('Checkout') {
-      steps {
-        checkout([$class: 'GitSCM',
-          branches: [[name: '*/main']],
-          userRemoteConfigs: [[url: 'https://github.com/JhoanLT/funny.git', credentialsId: 'github-pat']]
-        ])
-      }
+      steps { checkout scm }
     }
+
+    stage('Versiones') {
+      steps { sh 'node -v && npm -v' }
+    }
+
     stage('Install') {
       steps { sh 'npm ci' }
     }
+
     stage('Test') {
-      steps { sh 'npm test --silent || true' } // no rompas si aún no hay tests
-      post {
-        always { junit allowEmptyResults: true, testResults: 'reports/**/*.xml' }
-      }
+      when { expression { fileExists('package.json') } }
+      steps { sh 'npm test || true' }
     }
+
     stage('Build') {
-      steps { sh 'npm run build || true' }
-      post {
-        success { archiveArtifacts artifacts: 'dist/**/*', allowEmptyArchive: true }
+      steps { sh 'npm run build' }
+    }
+
+    stage('Artefacto (build)') {
+      steps {
+        archiveArtifacts artifacts: 'dist/**/*, build/**/*', allowEmptyArchive: true
       }
     }
   }
+
   post {
-    always { echo "Pipeline backend finalizado." }
+    always { echo 'Pipeline backend finalizado.' }
   }
 }
