@@ -9,9 +9,8 @@ describe('ItemsService', () => {
   let model: any;
 
   beforeEach(async () => {
-    const modelMock: any = jest.fn(); // para "new this.itemModel(dto)"
+    const modelMock: any = jest.fn();
 
-    // Métodos estilo Mongoose
     modelMock.find = jest.fn().mockReturnThis();
     modelMock.sort = jest.fn().mockReturnThis();
     modelMock.exec = jest.fn();
@@ -36,7 +35,6 @@ describe('ItemsService', () => {
 
   it('debería devolver todos los items ordenados por createdAt desc', async () => {
     const result = [{ name: 'A' }, { name: 'B' }];
-
     model.exec.mockResolvedValue(result);
 
     const items = await service.findAll();
@@ -48,7 +46,6 @@ describe('ItemsService', () => {
 
   it('debería devolver un item por id', async () => {
     const result = { _id: '1', name: 'One' };
-
     model.exec.mockResolvedValue(result);
 
     const item = await service.findOne('1');

@@ -72,17 +72,15 @@
     },
     "collectCoverageFrom": [
       "**/*.ts",
-      "!**/*.spec.ts"
+      "!**/*.spec.ts",
+      "!main.ts",
+      "!app.module.ts",
+      "!items/dto/**",
+      "!items/schemas/**"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node",
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "main.ts",
-      "app.module.ts",
-      "items/dto/",
-      "items/schemas/"
-    ]
+    "coverageReporters": ["text", "lcov", "text-summary"],
+    "testEnvironment": "node"
   },
 
   "pnpm": {
