@@ -7,5 +7,5 @@
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
   },
-  "reporters": ["default", ["jest-junit", { "outputDirectory": "reports", "outputName": "jest-junit.xml" }]]
+  "reporters": ["default", ["jest-junit", { "outputDirectory": "reports", "outputName": "jest-junit.xml" }]],
 }
