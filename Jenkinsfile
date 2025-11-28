@@ -33,11 +33,19 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'codecov-token', variable: 'CODECOV_TOKEN')]) {
           sh '''
-            # Descargar Codecov CLI (Linux estándar)
-            curl -Os https://cli.codecov.io/latest/linux/codecov
+            ARCH=$(uname -m)
+            echo "Detected arch: $ARCH"
+
+            if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
+              echo "Using Codecov CLI for linux-arm64"
+              curl -Os https://cli.codecov.io/latest/linux-arm64/codecov
+            else
+              echo "Using Codecov CLI for linux (x86_64)"
+              curl -Os https://cli.codecov.io/latest/linux/codecov
+            fi
+
             chmod +x codecov
 
-            # Subir el reporte de coverage
             ./codecov upload-process \
               --fail-on-error \
               -t "$CODECOV_TOKEN" \
@@ -46,6 +54,7 @@ pipeline {
         }
       }
     }
+
 
     stage('Build') {
       steps {
