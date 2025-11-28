@@ -1,0 +1,7 @@
+coverage:
+  ignore:
+    - "src/main.ts"
+    - "src/app.module.ts"
+    - "src/items/items.module.ts"
+    - "src/items/dto/*"
+    - "src/items/schemas/*"
