@@ -73,16 +73,16 @@
     "collectCoverageFrom": [
       "**/*.ts",
       "!**/*.spec.ts",
+      "!**/*.module.ts",
       "!main.ts",
-      "!app.module.ts",
       "!items/dto/**",
       "!items/schemas/**"
     ],
+
     "coverageDirectory": "../coverage",
     "coverageReporters": ["text", "lcov", "text-summary"],
     "testEnvironment": "node"
   },
-
   "pnpm": {
     "onlyBuiltDependencies": [
       "@nestjs/core",
